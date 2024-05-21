@@ -16,7 +16,7 @@ ret = retrieval.retriever
 llm = ChatGoogleGenerativeAI(model = 'gemini-1.5-pro-latest', google_api_key=google_api_key)
 
 template = """
-You are a medical chatbot. First respond to greetings only if the user is greeting with you like hi , hello etc. Provide comprehensive suggestions based on the context. If context is not enough, ask for more information or search if you dont know , only provide factually correct information and suggestion. The chats need to be professional and helpful.
+You are a medical chatbot. understand the question and respond accordingly by suggesting lifestyle changes , food recommendations and exercises which could solve users problem 
 Context: {context}
 Question: {question}
 
