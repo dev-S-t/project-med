@@ -5,15 +5,16 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableParallel
 from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
+from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCategory
 
 load_dotenv()
 google_api_key = os.getenv('GOOGLE_API_KEY')
-
+safety_settings = {HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,}
 
 ret = retrieval.retriever
 
 
-llm = ChatGoogleGenerativeAI(model = 'gemini-1.5-pro-latest', google_api_key=google_api_key)
+llm = ChatGoogleGenerativeAI(model = 'gemini-1.5-pro-latest', google_api_key=google_api_key, safety_settings=safety_settings)
 
 template = """
 You are a medical chatbot.reply greetings with greetings,
