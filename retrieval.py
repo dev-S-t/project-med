@@ -19,22 +19,26 @@ embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_a
 
 # %%
 data_dir = r"data\random.txt.txt"
-loader = TextLoader(data_dir )
 
-# %%
-docs = loader.load()
+def get_csv_text(path):
+    df = pd.read_csv(path)
+    text=""
+    for index, row in df.iterrows():
+        text += row['Answer'] + " "
+    return  text
 
-# %%
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 1000,
-    chunk_overlap  = 100,
-    length_function = len,
-    add_start_index = True,)
-texts = text_splitter.split_documents(docs)
+txt = get_csv_text(r"data\random.csv")
+
+def get_text_chunks(text):
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    chunks = text_splitter.split_text(text)
+    return chunks
+
+chunks = get_text_chunks(txt)
 
 # %%
 index_name = "project-med"
-vectorstore = PineconeVectorStore.from_documents(texts, index_name= index_name, embedding= embeddings)
+vectorstore = PineconeVectorStore.from_texts(chunks , index_name= index_name, embedding= embeddings)
 
 # %%
 retriever = vectorstore.as_retriever()
