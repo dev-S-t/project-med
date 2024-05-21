@@ -7,7 +7,7 @@ from langchain_community.document_loaders import TextLoader
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.runnables import RunnablePassthrough
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
+import pandas as pd
 
 load_dotenv()
 # %%
