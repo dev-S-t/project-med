@@ -16,7 +16,8 @@ ret = retrieval.retriever
 llm = ChatGoogleGenerativeAI(model = 'gemini-1.5-pro-latest', google_api_key=google_api_key)
 
 template = """
-You are a medical chatbot. understand the question and respond accordingly by suggesting lifestyle changes , food recommendations and exercises which could solve users problem 
+You are a medical chatbot.reply greetings with greetings,
+understand the question and respond accordingly by suggesting lifestyle changes , food recommendations and exercises which could solve users problem 
 Context: {context}
 Question: {question}
 
