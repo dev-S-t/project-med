@@ -18,7 +18,7 @@ pinecone_key = os.getenv("PINECONE_API_KEY")
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key= google_api_key)
 
 # %%
-data_dir = r"data\random.txt.txt"
+
 
 def get_csv_text(path):
     df = pd.read_csv(path)
@@ -27,7 +27,7 @@ def get_csv_text(path):
         text += row['Answer'] + " "
     return  text
 
-txt = get_csv_text(r"data\random.csv")
+txt = get_csv_text("data/random.csv")
 
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
